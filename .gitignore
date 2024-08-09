@@ -1,2 +1,6 @@
+#IDEA Settings
 /.idea/
 /*.iml
+
+#Includes
+/out/
