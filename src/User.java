@@ -2,6 +2,12 @@ public class User {
     private String name;
     private String role;
 
+    //constructor
+    public User(String name, String role){
+        this.name = name;
+        this.role = role;
+    }
+
     //getters
     public String getName() {
         return name;
@@ -11,11 +17,11 @@ public class User {
     }
 
     //setters
-    public void setName(String newName) {
-        name = newName;
+    public void setName(String name) {
+        this.name = name;
     }
-    public void setRole(String newRole) {
-        role = newRole;
+    public void setRole(String role) {
+        this.role = role;
     }
 
     //displayInfo
