@@ -2,8 +2,12 @@ public class Pet {
     private String name;
     private int age;
     private String adoptionStatus;
+    static int numberOfPets;
+    static int numberOfPetsAvailable;
+    static int numberOfPetsPending;
+    static int numberOfPetsUnavailable;
 
-    //constrcutors
+    //constructor
     public Pet (String name, int age, String adoptionStatus){
         this.name = name;
         this.age = age;
