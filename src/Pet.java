@@ -38,6 +38,22 @@ public class Pet {
 
     //displayInfo
     public void displayInfo(){
-        System.out.println("NAME: " + name + " AGE: " + age + " ADOPTION STATUS: " + adoptionStatus);
+        System.out.println("NAME: " + name + " | AGE: " + age + " | ADOPTION STATUS: " + adoptionStatus);
+    }
+
+    public static int getNumberOfPets() {
+        return numberOfPets;
+    }
+
+    public static int getNumberOfPetsAvailable() {
+        return numberOfPetsAvailable;
+    }
+
+    public static int getNumberOfPetsPending() {
+        return numberOfPetsPending;
+    }
+
+    public static int getNumberOfPetsUnavailable() {
+        return numberOfPetsUnavailable;
     }
 }
