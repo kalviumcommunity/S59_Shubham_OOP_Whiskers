@@ -1,18 +1,21 @@
+import animals.Pet;
+import animals.options.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class WhiskersMain{
 
     public static void initStore(List <Pet> petStorage){
-        petStorage.add(new Pet("Ginger", 5, "AVAILABLE"));
-        petStorage.add(new Pet("Tommy", 8, "AVAILABLE"));
-        petStorage.add(new Pet("Scooby", 10, "AVAILABLE"));
-        petStorage.add(new Pet("Charlie", 9, "AVAILABLE"));
-        petStorage.add(new Pet("Dave", 11, "AVAILABLE"));
-        Pet.numberOfPets = 5;
-        Pet.numberOfPetsAvailable = 5;
-        Pet.numberOfPetsPending = 0;
-        Pet.numberOfPetsUnavailable = 0;
+        petStorage.add(new Cat("Ginger", 5, "AVAILABLE", "Siamese"));
+        petStorage.add(new Dog("Tommy", 8, "AVAILABLE", "beagle"));
+        petStorage.add(new Dog("Scooby", 10, "AVAILABLE", "Bulldog"));
+        petStorage.add(new Dog("Charlie", 9, "AVAILABLE", "Labrador"));
+        petStorage.add(new Cat("Dave", 11, "AVAILABLE", "Sphinx"));
+        petStorage.add(new Bird("Twitter", 11, "AVAILABLE", "African Grey", "Parrot"));
+        petStorage.add(new Bird("Hayes", 11, "AVAILABLE", "Ring-Necked", "Dove"));
+        Pet.setNumberOfPets(7);
+        Pet.setNumberOfPetsAvailable(7);
     }
 
     public static void main(String[] args){
@@ -25,6 +28,7 @@ public class WhiskersMain{
         System.out.println("Following is the list of them:");
         for(Pet pet : petStorage){
             pet.displayInfo();
+            pet.makeSound();
         }
     }
 }
