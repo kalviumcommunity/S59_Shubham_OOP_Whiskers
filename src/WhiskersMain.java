@@ -30,5 +30,13 @@ public class WhiskersMain{
             pet.displayInfo();
             pet.makeSound();
         }
+        System.out.println("=================================================");
+        //new keyword usage
+        Pet poppy = new Dog("Poppy", 11, "AVAILABLE", "Beagle");
+        poppy.makeSound();
+        poppy.displayInfo();
+        //mock of delete method in C++
+        poppy = null;
+        System.gc();
     }
 }
