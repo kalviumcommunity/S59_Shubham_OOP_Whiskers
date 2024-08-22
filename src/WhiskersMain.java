@@ -2,6 +2,7 @@ import animals.Pet;
 import animals.options.*;
 import users.User;
 import users.options.*;
+import animals.options.reptiles.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +20,8 @@ public class WhiskersMain{
         System.out.println("Press 1 to register as a user:");
         System.out.println("Press 2 to see all the available pets:");
         System.out.println("Press 3 to see all the users:");
-        System.out.println("Press 4 to see all the guides for help:");
+        System.out.println("Press 4 to add a pet:");
+        System.out.println("Press 5 to see all the guides for help:");
         System.out.println("Any other key to end the store:");
         int signal = scanner.nextInt();
         switch(signal){
@@ -33,6 +35,9 @@ public class WhiskersMain{
                 showAllUsers();
                 break;
             case 4:
+                petSelection();
+                break;
+            case 5:
                 userGuide();
                 break;
             default:
@@ -41,11 +46,13 @@ public class WhiskersMain{
         }
     }
     public static void initStore(){
-        petStorage.add(new Cat("Ginger", 5, "AVAILABLE", "Siamese"));
-        petStorage.add(new Dog("Tommy", 8, "AVAILABLE", "beagle"));
-        petStorage.add(new Dog("Scooby", 10, "AVAILABLE", "Bulldog"));
-        petStorage.add(new Dog("Charlie", 9, "AVAILABLE", "Labrador"));
-        petStorage.add(new Cat("Dave", 11, "AVAILABLE", "Sphinx"));
+        petStorage.add(new Cat("Ginger", 5, "AVAILABLE", "Siamese", "Cat"));
+        petStorage.add(new Dog("Tommy", 8, "AVAILABLE", "beagle", "Dog"));
+        petStorage.add(new Snake("Fissy", 11, "AVAILIABLE", "Burmese Python", "Snake", false, "Diamond"));
+        petStorage.add(new Crocodile("Crocs", 7, "AVAILIABLE", "Indian", "Crocodile", false, false));
+        petStorage.add(new Dog("Scooby", 10, "AVAILABLE", "Bulldog", "Dog"));
+        petStorage.add(new Dog("Charlie", 9, "AVAILABLE", "Labrador", "Dog"));
+        petStorage.add(new Cat("Dave", 11, "AVAILABLE", "Sphinx", "Cat"));
         petStorage.add(new Bird("Twitter", 11, "AVAILABLE", "African Grey", "Parrot"));
         petStorage.add(new Bird("Hayes", 11, "AVAILABLE", "Ring-Necked", "Dove"));
         Pet.setNumberOfPets(7);
@@ -95,7 +102,76 @@ public class WhiskersMain{
         }
         userslist.add(newUser);
         User.setNumberOfUsers(User.getNumberOfUsers() + 1);
+        User.setNumberOfUsers(User.getNumberOfUsers() + 1);
         newUser.success();
+        userGuide();
+    }
+
+    public static void addPet(int signal){
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the name:");
+        String name = scanner.nextLine();
+        System.out.print("Enter the age:");
+        int age = scanner.nextInt();
+        scanner.nextLine();
+        System.out.print("Enter the breed:");
+        String breed = scanner.nextLine();
+        Pet newPet;
+        if(signal == 1){
+            newPet = new Dog(name, age, "AVAILABLE", breed, "Dog");
+        }
+        else if(signal == 2){
+            newPet = new Cat(name, age, "AVAILABLE", breed, "Cat");
+        }
+        else if(signal == 3){
+            System.out.println("Enter its kind (eg. Piegon, Dove..): ");
+            String kind = scanner.nextLine();
+            newPet = new Bird(name, age, "AVAILABLE", breed, kind);
+        }
+        else{
+            System.out.println("Is it Venomous? (Enter true/false (lowercase)): ");
+            boolean isVenomous = scanner.nextBoolean();
+            scanner.nextLine();
+            if(signal == 4){
+                System.out.print("Enter the scale pattern:");
+                String scalePattern = scanner.nextLine();
+                newPet = new Snake(name, age, "AVAILABLE", breed, "Snake", isVenomous, scalePattern);
+            }
+            else if(signal == 5){
+                System.out.print("Enter the habitat:");
+                String habitat = scanner.nextLine();
+                newPet = new Lizard(name, age, "AVAILABLE", breed, "Crocodile", isVenomous, habitat);
+            }
+            else if(signal == 6){
+                System.out.print("Does it generally live in freshwater (Enter true/false (lowercase)): ");
+                boolean isFreshwater = scanner.nextBoolean();
+                scanner.nextLine();
+                newPet = new Crocodile(name, age, "AVAILABLE", breed, "Lizard", isVenomous, isFreshwater);
+            }
+            else{
+                System.out.println("Wrong input. Exiting. ");
+                return;
+            }
+        }
+        petStorage.add(newPet);
+        System.out.println("Added successfully!");
+    }
+
+    public static void petSelection(){
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("=================================================");
+        System.out.println("Here are the controls:");
+        System.out.println("Press 1 to add a dog:");
+        System.out.println("Press 2 to add a cat:");
+        System.out.println("Press 3 to add a bird:");
+        System.out.println("Press 4 to add a snake:");
+        System.out.println("Press 5 to add a lizard:");
+        System.out.println("Press 6 to add a crocodile:");
+        System.out.println("Any other key to come back:");
+        int signal = scanner.nextInt();
+        if(signal <= 6){
+            addPet(signal);
+        }
         userGuide();
     }
 
