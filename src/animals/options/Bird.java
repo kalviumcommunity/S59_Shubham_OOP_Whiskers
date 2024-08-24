@@ -3,9 +3,9 @@ package animals.options;
 import animals.Pet;
 
 public class Bird extends Pet {
+    public Bird(){}
     public Bird(String name, int age, String adoptionStatus, String breed, String kind){
-        super(name, age, adoptionStatus, breed);
-        this.kind = kind;
+        super(name, age, adoptionStatus, breed, kind);
     }
     @Override
     public void makeSound(){

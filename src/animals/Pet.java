@@ -10,13 +10,23 @@ public abstract class Pet {
     static int numberOfPetsAvailable;
     static int numberOfPetsPending;
     static int numberOfPetsUnavailable;
+    static String unknownStatus = "Unknown";
+
+    public Pet(){
+        this.name = unknownStatus;
+        this.age = -1;
+        this.adoptionStatus = "AVAILABLE";
+        this.breed = unknownStatus;
+        this.kind = unknownStatus;
+    }
 
     //constructor
-    public Pet (String name, int age, String adoptionStatus, String breed){
+    public Pet (String name, int age, String adoptionStatus, String breed, String kind){
         this.name = name;
         this.age = age;
         this.adoptionStatus = adoptionStatus;
         this.breed = breed;
+        this.kind = kind;
     }
 
     //getters
