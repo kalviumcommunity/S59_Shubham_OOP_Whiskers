@@ -46,6 +46,7 @@ public class WhiskersMain{
         }
     }
     public static void initStore(){
+        petStorage.add(new Dog());
         petStorage.add(new Cat("Ginger", 5, "AVAILABLE", "Siamese", "Cat"));
         petStorage.add(new Dog("Tommy", 8, "AVAILABLE", "beagle", "Dog"));
         petStorage.add(new Snake("Fissy", 11, "AVAILIABLE", "Burmese Python", "Snake", false, "Diamond"));
