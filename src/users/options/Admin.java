@@ -1,6 +1,5 @@
 package users.options;
 
-import java.util.UUID;
 import users.User;
 
 public class Admin extends User {

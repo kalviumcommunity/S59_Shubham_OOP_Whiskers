@@ -1,28 +1,22 @@
 package adoption;
 
 import animals.Pet;
-import users.options.*;
-import animals.options.*;
+import java.util.UUID;
 
+//solely for setting up adoption requests and respective logic
 public class AdoptionRequest {
     private final String requestId;
-    private final Customer customer;
     private final Pet pet;
     private String status;
 
-    public AdoptionRequest(String requestId, Customer customer, Pet pet){
-        this.requestId = requestId;
-        this.customer = customer;
+    public AdoptionRequest(Pet pet){
+        this.requestId = UUID.randomUUID().toString();
         this.pet = pet;
         this.status = "PENDING";
     }
 
     public void approve(){
         this.status = "APPROVED";
-    }
-
-    public Customer getCustomer() {
-        return customer;
     }
 
     public Pet getPet() {

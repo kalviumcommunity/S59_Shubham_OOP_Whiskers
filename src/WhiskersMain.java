@@ -1,5 +1,8 @@
+import adoption.AdoptionRequest;
+import adoption.AdoptionService;
 import animals.Pet;
 import animals.options.*;
+import store.PetStore;
 import users.User;
 import users.options.*;
 import animals.options.reptiles.*;
@@ -9,8 +12,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class WhiskersMain{
-    private static List <Pet> petStorage = new ArrayList<>();
-    private static List <Pet> adoptionRequests = new ArrayList<>();
+    private static PetStore petStore = new PetStore();
     private static List <User> userslist = new ArrayList<>();
 
     public static void userGuide(){
@@ -21,7 +23,8 @@ public class WhiskersMain{
         System.out.println("Press 2 to see all the available pets:");
         System.out.println("Press 3 to see all the users:");
         System.out.println("Press 4 to add a pet:");
-        System.out.println("Press 5 to see all the guides for help:");
+        System.out.println("Press 5 to adopt a pet:");
+        System.out.println("Press 6 to see all the guides for help:");
         System.out.println("Any other key to end the store:");
         int signal = scanner.nextInt();
         switch(signal){
@@ -38,6 +41,9 @@ public class WhiskersMain{
                 petSelection();
                 break;
             case 5:
+                adoptPet();
+                break;
+            case 6:
                 userGuide();
                 break;
             default:
@@ -46,16 +52,16 @@ public class WhiskersMain{
         }
     }
     public static void initStore(){
-        petStorage.add(new Dog());
-        petStorage.add(new Cat("Ginger", 5, "AVAILABLE", "Siamese", "Cat"));
-        petStorage.add(new Dog("Tommy", 8, "AVAILABLE", "beagle", "Dog"));
-        petStorage.add(new Snake("Fissy", 11, "AVAILIABLE", "Burmese Python", "Snake", false, "Diamond"));
-        petStorage.add(new Crocodile("Crocs", 7, "AVAILIABLE", "Indian", "Crocodile", false, false));
-        petStorage.add(new Dog("Scooby", 10, "AVAILABLE", "Bulldog", "Dog"));
-        petStorage.add(new Dog("Charlie", 9, "AVAILABLE", "Labrador", "Dog"));
-        petStorage.add(new Cat("Dave", 11, "AVAILABLE", "Sphinx", "Cat"));
-        petStorage.add(new Bird("Twitter", 11, "AVAILABLE", "African Grey", "Parrot"));
-        petStorage.add(new Bird("Hayes", 11, "AVAILABLE", "Ring-Necked", "Dove"));
+        petStore.addPet(new Dog());
+        petStore.addPet(new Cat("Ginger", 5, "AVAILABLE", "Siamese", "Cat"));
+        petStore.addPet(new Dog("Tommy", 8, "AVAILABLE", "beagle", "Dog"));
+        petStore.addPet(new Snake("Fissy", 11, "AVAILIABLE", "Burmese Python", "Snake", false, "Diamond"));
+        petStore.addPet(new Crocodile("Crocs", 7, "AVAILIABLE", "Indian", "Crocodile", false, false));
+        petStore.addPet(new Dog("Scooby", 10, "AVAILABLE", "Bulldog", "Dog"));
+        petStore.addPet(new Dog("Charlie", 9, "AVAILABLE", "Labrador", "Dog"));
+        petStore.addPet(new Cat("Dave", 11, "AVAILABLE", "Sphinx", "Cat"));
+        petStore.addPet(new Bird("Twitter", 11, "AVAILABLE", "African Grey", "Parrot"));
+        petStore.addPet(new Bird("Hayes", 11, "AVAILABLE", "Ring-Necked", "Dove"));
         Pet.setNumberOfPets(7);
         Pet.setNumberOfPetsAvailable(7);
     }
@@ -63,7 +69,8 @@ public class WhiskersMain{
     public static void showAvailablePets(){
         System.out.println("We have around " + Pet.getNumberOfPets() + " pets available in our store!");
         System.out.println("Following is the list of them:");
-        for(Pet pet : petStorage){
+        List<Pet> petlist = petStore.getPetStore();
+        for(Pet pet : petlist){
             pet.displayInfo();
             pet.makeSound();
         }
@@ -154,7 +161,7 @@ public class WhiskersMain{
                 return;
             }
         }
-        petStorage.add(newPet);
+        petStore.addPet(newPet);
         System.out.println("Added successfully!");
     }
 
@@ -175,6 +182,33 @@ public class WhiskersMain{
         }
         userGuide();
     }
+
+    public static void adoptPet(){
+        System.out.println("Enter the name of the one you wish to adopt:");
+        Scanner scanner = new Scanner(System.in);
+        String petInput = scanner.nextLine();
+        Pet petToAdopt = getPetByName(petInput);
+        if(petToAdopt != null){
+            AdoptionRequest adoptionRequest = new AdoptionRequest(petToAdopt);
+            AdoptionService adoptionService = new AdoptionService();
+            adoptionService.adoptPet(petStore, adoptionRequest);
+            adoptionRequest.approve();
+        } else{
+            System.out.println(petInput + " doesn't exist!");
+        }
+        userGuide();
+    }
+
+    public static Pet getPetByName(String name){
+        List <Pet> petList = petStore.getPetStore();
+        for(Pet p : petList){
+            if(p.getName().equalsIgnoreCase(name)){
+                return p;
+            }
+        }
+        return null;
+    }
+
 
     public static void main(String[] args){
         initStore();
