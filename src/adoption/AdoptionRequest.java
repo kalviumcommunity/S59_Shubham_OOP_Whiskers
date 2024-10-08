@@ -1,11 +1,9 @@
 package adoption;
 
 import animals.Pet;
-import users.options.*;
-import animals.options.*;
-
 import java.util.UUID;
 
+//solely for setting up adoption requests and respective logic
 public class AdoptionRequest {
     private final String requestId;
     private final Pet pet;

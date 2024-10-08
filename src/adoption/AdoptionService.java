@@ -3,6 +3,8 @@ package adoption;
 import animals.Pet;
 import store.PetStoreInterface;
 
+//solely for adoption of pet
+//the service depends on the interface rather than the specific class
 public class AdoptionService {
     public void adoptPet(PetStoreInterface petStore, AdoptionRequest adoptionRequest){
         Pet petToAdopt = adoptionRequest.getPet();

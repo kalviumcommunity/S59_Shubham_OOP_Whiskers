@@ -5,6 +5,7 @@ import animals.Pet;
 import java.util.ArrayList;
 import java.util.List;
 
+//the class implements the interface
 public class PetStore implements PetStoreInterface {
     private List<Pet> petStore = new ArrayList<>();
 

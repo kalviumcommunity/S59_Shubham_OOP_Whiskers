@@ -1,5 +1,6 @@
 package animals;
 
+//the class is open for extensions but closed for modifications when new kind of pet is added.
 public abstract class Pet {
     protected String name;
     protected int age;
